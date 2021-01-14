@@ -1,0 +1,56 @@
+php artisan make:migration create_usuario_table --create=usuario
+php artisan make:seeder UsuarioTableSeeder
+php artisan migrate:refresh --seed
+
+php artisan make:migration create_rol_table --create=rol
+php artisan make:seeder RolTableSeeder
+php artisan db:seed --class=RolTableSeeder
+
+php artisan make:migration create_funcion_table --create=funcion
+php artisan make:model Funcion
+php artisan make:seeder FuncionTableSeeder
+php artisan migrate:refresh --seed
+
+php artisan make:migration create_ui_table --create=ui
+php artisan make:model Ui
+
+php artisan make:migration create_tipo_proyecto_table --create=tipo_proyecto
+php artisan make:model TipoProyecto
+php artisan make:seeder TipoProyectoTableSeeder
+
+php artisan make:migration create_proyecto_status_table --create=proyecto_status
+php artisan make:model ProyectoStatus
+php artisan make:seeder ProyectoStatusTableSeeder
+
+php artisan make:migration create_area_academica_table --create=area_academica
+php artisan make:model AreaAcademica
+php artisan make:seeder AreaAcademicaTableSeeder
+
+php artisan make:migration create_dependencia_academica_table --create=dependencia_academica
+php artisan make:model DependenciaAcademica
+php artisan make:seeder DependenciaAcademicaTableSeeder
+
+# Tablas Pivote como Laravel los denomina, para la seccion de Seguridad
+php artisan make:migration create_rol_usuario_table --create=rol_usuario
+php artisan make:migration create_funcion_rol_table --create=funcion_rol
+php artisan make:migration create_funcion_ui_table --create=funcion_ui
+
+php artisan make:migration create_proyecto_table --create=proyecto
+
+php artisan make:migration create_proyecto_usuario_table --create=proyecto_usuario
+
+php artisan make:migration create_proyecto_detalle_table --create=proyecto_detalle
+-- para esta tabla he creado la migracion con id,proyecto_id como claves
+-- primarias pero como los modelos Eloquent de LAravel no soportan composite
+-- keys... segun este link he creado a manija la secuencia para id column
+-- (auto-increment) https://stackoverflow.com/questions/787722/postgresql-autoincrement
+-- CREATE SEQUENCE proyecto_detalle_seq;
+-- ALTER TABLE proyecto_detalle ALTER id SET DEFAULT NEXTVAL('proyecto_detalle_seq');
+
+-- Session table migracion
+php artisan make:migration create_session_table --create=session
+php artisan make:model Session
+
+-- Bitacora table
+php artisan make:migration create_bitacora_table --create=bitacora
+php artisan make:model Bitacora
